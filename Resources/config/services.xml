@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="monolog_fluentd.fluentd.port">443</parameter>
+        <parameter key="monolog_fluentd.fluentd.host">logs.loggly.com</parameter>
+        <parameter key="monolog_fluentd.fluentd.level"></parameter>
+        <parameter key="monolog_fluentd.fluentd.bubble">true</parameter>
+    </parameters>
+
+    <services>
+        <service id="monolog_fluentd.monolog_handler" class="%monolog_fluentd.monolog_handler.class%">
+            <argument>%monolog_fluentd.fluentd.port%</argument>
+            <argument>%monolog_fluentd.fluentd.host%</argument>
+            <argument>%monolog_fluentd.fluentd.level%</argument>
+            <argument>%monolog_fluentd.fluentd.bubble%</argument>
+        </service>
+    </services>
+</container>
