@@ -9,5 +9,5 @@
     "autoload": {
         "psr-0": {"Seretalabs\\Bundle\\MonologFluentdBundle\\": ""}
     },
-    "target-dir" : "seretalabs/Bundle/MonologFluentdBundle"
+    "target-dir" : "Seretalabs/Bundle/MonologFluentdBundle"
 }
