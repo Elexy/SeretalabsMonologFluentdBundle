@@ -1,9 +1,10 @@
 # SeretalabsMonologFluentdBundle
 
     This bundle enables logging to the fluentd log concentrator from Symfony.
-    Fluentd is an open source datacollector and decouples your logging collection and analysis tools
-    from your project by sending all logs from deamons, apps in front and backend to one single daemon
-    and use filtering to selectively forward to storage engine / analysis tools
+    Fluentd is an open source datacollector and decouples your logging collection
+    and analysis tools from your project by sending all logs from deamons, apps
+    in front and backend to one single daemon and use filtering to selectively
+    forward to storage engine / analysis tools
 
 [fluentd](http://www.fluentd.org/) handler for [Monolog](https://github.com/Seldaek/monolog) as a Symfony bundle.
 
