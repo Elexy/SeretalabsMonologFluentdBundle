@@ -26,7 +26,8 @@ class SeretalabsMonologFluentdExtension extends Extension
         $loader->load('services.xml');
 
         // Set the level to the correct integer value provided by Monoglog
-        $config['level'] = is_int($config['level']) ? $config['level'] : constant('Monolog\Logger::'.strtoupper($config['level']));
+        $config['level'] = is_int($config['level']) ?
+		        $config['level'] : constant('Monolog\Logger::'.strtoupper($config['level']));
 
 
 	    $container->setParameter('monolog_fluentd.fluentd.host', $config['host']);

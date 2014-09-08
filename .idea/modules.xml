@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/LogglyBundle-master.iml" filepath="$PROJECT_DIR$/.idea/LogglyBundle-master.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/SeretalabMonologFluentdBundle.iml" filepath="$PROJECT_DIR$/.idea/SeretalabMonologFluentdBundle.iml" />
     </modules>
   </component>

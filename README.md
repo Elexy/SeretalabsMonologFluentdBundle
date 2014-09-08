@@ -10,12 +10,6 @@
 
 ## Installation
 
-Deps
-
-    [WhitewashingLogglyBundle]
-        git=https://github.com/beberlei/WhitewashingLogglyBundle.git
-        target=/bundles/Whitewashing/Bundle/LogglyBundle
-
 Kernel
 
     $bundles = array(
@@ -57,3 +51,20 @@ Configure monolog for fluentd:
         level: DEBUG
 
         bubble: true
+
+## Usage
+
+```php
+<?php
+use Monolog\Logger;
+
+$logger->debug('example.monolog', array('foo' => 'bar'));
+$logger->info('example.fluentd', array('fizz' => 'buzz'));
+
+// Fluentd:
+// 2013-10-11 01:00:00 +0900 dakatsuka.example.monolog: {"foo":"bar","level":"DEBUG"}
+// 2013-10-11 01:00:00 +0900 dakatsuka.example.fluentd: {"fizz":"buzz","level":"INFO"}
+```
+
+## credits
+	This bundle uses [daktsuka](https://github.com/dakatsuka)'s fluentd handler for Monolog [https://github.com/dakatsuka/MonologFluentHandler]
