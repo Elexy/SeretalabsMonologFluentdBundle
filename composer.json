@@ -4,7 +4,8 @@
     "type": "bundle",
     "authors": [{"name": "Alex Knol", "email": "alex@seretalabs.com"}],
     "require": {
-        "symfony/monolog-bundle": "*"
+        "symfony/monolog-bundle": "*",
+	      "nrk/monolog-fluent": "dev-master"
     },
     "autoload": {
         "psr-0": {"Seretalabs\\Bundle\\MonologFluentdBundle\\": ""}

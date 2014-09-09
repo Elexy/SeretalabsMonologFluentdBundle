@@ -24,7 +24,7 @@ class Configuration implements ConfigurationInterface
 			        ->scalarNode('port')->defaultValue(24224)->end()
 			        ->scalarNode('host')->defaultValue('localhost')->end()
 			        ->scalarNode('level')->defaultValue(constant('Monolog\Logger::DEBUG'))->end()
-	            ->booleanNode('bubble')->defaultValue(true)->end()
+	                ->booleanNode('bubble')->defaultValue(true)->end()
             ->end();
 
         return $treeBuilder;
