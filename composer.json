@@ -7,7 +7,13 @@
         "symfony/monolog-bundle": "*",
 	      "nrk/monolog-fluent": "v0.1"
     },
-    "autoload": {
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/Elexy/monolog-fluent"
+		}
+	],
+	"autoload": {
         "psr-0": {"Seretalabs\\Bundle\\MonologFluentdBundle\\": ""}
     },
     "target-dir" : "Seretalabs/Bundle/MonologFluentdBundle"
