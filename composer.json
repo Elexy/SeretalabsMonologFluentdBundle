@@ -1,12 +1,12 @@
 {
-    "name": "seretalabs/monolog-fluentd-bundle",
-    "description": "Simple wrapper bundle for Symfony2 that extends Monolog with Fluentd support",
-    "type": "bundle",
-    "authors": [{"name": "Alex Knol", "email": "alex@seretalabs.com"}],
-    "require": {
-        "symfony/monolog-bundle": "*",
-	      "nrk/monolog-fluent": "v0.1"
-    },
+	"name": "seretalabs/monolog-fluentd-bundle",
+	"description": "Simple wrapper bundle for Symfony2 that extends Monolog with Fluentd support",
+	"type": "bundle",
+	"authors": [{"name": "Alex Knol", "email": "alex@seretalabs.com"}],
+	"require": {
+		"symfony/monolog-bundle": "*",
+		"nrk/monolog-fluent": "*"
+	},
 	"repositories": [
 		{
 			"type": "vcs",
@@ -14,7 +14,7 @@
 		}
 	],
 	"autoload": {
-        "psr-0": {"Seretalabs\\Bundle\\MonologFluentdBundle\\": ""}
-    },
-    "target-dir" : "Seretalabs/Bundle/MonologFluentdBundle"
+		"psr-0": {"Seretalabs\\Bundle\\MonologFluentdBundle\\": ""}
+	},
+	"target-dir": "Seretalabs/Bundle/MonologFluentdBundle"
 }
