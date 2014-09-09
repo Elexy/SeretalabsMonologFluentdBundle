@@ -11,7 +11,7 @@
  * to kontakt@beberlei.de so I can send you a copy immediately.
  */
 
-namespace Seretalabs\Bundle\MonologFluentdBundle\Bundle\Monolog\Handler;
+namespace Seretalabs\Bundle\MonologFluentdBundle\Monolog\Handler;
 
 use Seretalabs\Bundle\MonologFluentdBundle\SeretalabsMonologFluentdBundle;
 use Fluent\Logger\FluentLogger;
