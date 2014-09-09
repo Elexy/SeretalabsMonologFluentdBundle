@@ -1,6 +1,6 @@
 <?php
 
-namespace Seretalabs\Bundle\MonologFluentdBundle\Bundle\DependencyInjection;
+namespace Seretalabs\Bundle\MonologFluentdBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
