@@ -13,7 +13,6 @@
 
 namespace Seretalabs\Bundle\MonologFluentdBundle\Monolog\Handler;
 
-use Seretalabs\Bundle\MonologFluentdBundle\SeretalabsMonologFluentdBundle;
 use Fluent\Logger\FluentLogger;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Formatter\JsonFormatter;
@@ -29,9 +28,9 @@ use Monolog\Logger;
 class MonologFluentdHandler extends AbstractProcessingHandler
 {
 	/**
-	 * @var string
+	 * @var FluentLogger
 	 */
-	private $key;
+	private $logger;
 	/**
 	 * @var int
 	 */
