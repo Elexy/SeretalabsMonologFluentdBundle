@@ -5,10 +5,12 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
         <parameter key="monolog_fluentd.monolog_handler.class">Seretalabs\Bundle\MonologFluentdBundle\Monolog\Handler\MonologFluentdHandler</parameter>
-        <parameter key="monolog_fluentd.fluentd.port">443</parameter>
-        <parameter key="monolog_fluentd.fluentd.host">logs.loggly.com</parameter>
+        <parameter key="monolog_fluentd.fluentd.port">24224</parameter>
+        <parameter key="monolog_fluentd.fluentd.host">localhost</parameter>
         <parameter key="monolog_fluentd.fluentd.level"></parameter>
         <parameter key="monolog_fluentd.fluentd.bubble">true</parameter>
+        <parameter key="monolog_fluentd.fluentd.env">none</parameter>
+        <parameter key="monolog_fluentd.fluentd.tag">backend</parameter>
     </parameters>
 
     <services>
@@ -17,6 +19,8 @@
             <argument>%monolog_fluentd.fluentd.host%</argument>
             <argument>%monolog_fluentd.fluentd.level%</argument>
             <argument>%monolog_fluentd.fluentd.bubble%</argument>
+            <argument>%monolog_fluentd.fluentd.env%</argument>
+            <argument>%monolog_fluentd.fluentd.tag%</argument>
         </service>
     </services>
 </container>

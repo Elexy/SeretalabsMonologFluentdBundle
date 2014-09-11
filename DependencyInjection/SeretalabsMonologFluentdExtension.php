@@ -30,9 +30,11 @@ class SeretalabsMonologFluentdExtension extends Extension
 		        $config['level'] : constant('Monolog\Logger::'.strtoupper($config['level']));
 
 
-	    $container->setParameter('monolog_fluentd.fluentd.host', $config['host']);
 	    $container->setParameter('monolog_fluentd.fluentd.port', $config['port']);
+	    $container->setParameter('monolog_fluentd.fluentd.host', $config['host']);
 	    $container->setParameter('monolog_fluentd.fluentd.level', $config['level']);
-      $container->setParameter('monolog_fluentd.fluentd.bubble', $config['bubble']);
+        $container->setParameter('monolog_fluentd.fluentd.bubble', $config['bubble']);
+        $container->setParameter('monolog_fluentd.fluentd.env', $config['env']);
+        $container->setParameter('monolog_fluentd.fluentd.tag', $config['tag']);
     }
 }

@@ -49,19 +49,21 @@ class MonologFluentdHandler extends AbstractProcessingHandler
 	 * @param bool $bubble
 	 */
 	public function __construct(
-		$host   = FluentLogger::DEFAULT_ADDRESS,
 		$port   = FluentLogger::DEFAULT_LISTEN_PORT,
+		$host   = FluentLogger::DEFAULT_ADDRESS,
 		$level = Logger::DEBUG,
-		$bubble = true)
+		$bubble = true,
+		$env = 'dev_ak',
+		$tag = 'backend')
 	{
 		$this->port = $port;
 		$this->host = $host;
+		$this->env = $env;
+		$this->tag = $tag;
 
 		parent::__construct($level, $bubble);
 
-		$logger = new FluentLogger($host, $port);
-
-		$this->logger = $logger;
+		$this->logger = new FluentLogger($host, $port);
 	}
 
 	/**
@@ -90,8 +92,14 @@ class MonologFluentdHandler extends AbstractProcessingHandler
 	 */
 	protected function write(array $record)
 	{
-		$tag  = $record['channel'] . '.' . $record['message'];
-		$data = $record['context'];
+		if (isset($record['context']) && isset($record['context']['tag'])) {
+			$tag = $record['context']['tag'];
+		} else {
+			$tag  = $this->tag;
+		}
+		$tag = $this->env . '.' . $tag;
+
+		$data = $record;
 		$data['level'] = Logger::getLevelName($record['level']);
 
 		$this->logger->post($tag, $data);
