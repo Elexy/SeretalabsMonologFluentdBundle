@@ -97,7 +97,7 @@ class MonologFluentdHandler extends AbstractProcessingHandler
 		} else {
 			$tag  = $this->tag;
 		}
-		$tag = $this->env . '.' . $tag;
+		$tag = $tag . '.' . $this->env;
 
 		$data = $record;
 		$data['level'] = Logger::getLevelName($record['level']);
