@@ -63,8 +63,24 @@ class MonologFluentdHandler extends AbstractProcessingHandler
 
 		parent::__construct($level, $bubble);
 
-		$this->logger = new FluentLogger($host, $port);
+                $this->initialize();
 	}
+
+        protected function initialize() {
+
+                if(!$this->logger) {
+                    // Ensure service failure does not compromise the app
+                    try {
+                        $this->logger = new FluentLogger($host, $port);
+                    }
+                    catch(\Exception $e) {
+                        $this->logger = null;
+                    }
+                }
+
+                return $this->logger;
+        }
+
 
 	/**
 	 * {@inheritdoc}
@@ -92,6 +108,11 @@ class MonologFluentdHandler extends AbstractProcessingHandler
 	 */
 	protected function write(array $record)
 	{
+
+                if(!$this->initialize()) {
+                    return;
+                }
+
 		if (isset($record['context']) && isset($record['context']['tag'])) {
 			$tag = $record['context']['tag'];
 		} else {
