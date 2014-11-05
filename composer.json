@@ -5,7 +5,7 @@
     "authors": [{"name": "Alex Knol", "email": "alex@seretalabs.com"}],
     "require": {
         "symfony/monolog-bundle": "*",
-	      "fluent/logger": "v0.3.7"
+        "fluent/logger": "v0.3.*"
     },
     "autoload": {
         "psr-0": {"Seretalabs\\Bundle\\MonologFluentdBundle\\": ""}
