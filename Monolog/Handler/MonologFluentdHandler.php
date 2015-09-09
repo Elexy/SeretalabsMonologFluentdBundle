@@ -28,7 +28,7 @@ use Monolog\Logger;
 class MonologFluentdHandler extends AbstractProcessingHandler
 {
 	/**
-	 * @var FluentLogger
+	 * @var FluentLogger|bool
 	 */
 	private $logger;
 	/**
@@ -62,24 +62,25 @@ class MonologFluentdHandler extends AbstractProcessingHandler
 		$this->tag = $tag;
 
 		parent::__construct($level, $bubble);
-
-                $this->initialize();
 	}
 
-        protected function initialize() {
+    private function lazyLoadLogger() {
 
-                if(!$this->logger) {
-                    // Ensure service failure does not compromise the app
-                    try {
-                        $this->logger = new FluentLogger($host, $port);
-                    }
-                    catch(\Exception $e) {
-                        $this->logger = null;
-                    }
-                }
-
-                return $this->logger;
+        if ($this->logger || ($this->logger === false)) {
+            // return if FluentLogger is already loaded or failed to load
+            return $this->logger;
         }
+
+        // Ensure service failure does not compromise the app
+        try {
+            $this->logger = new FluentLogger($this->host, $this->port);
+        }
+        catch (\Exception $e) {
+            $this->logger = false;
+        }
+
+        return $this->logger;
+    }
 
 
 	/**
@@ -108,10 +109,9 @@ class MonologFluentdHandler extends AbstractProcessingHandler
 	 */
 	protected function write(array $record)
 	{
-
-                if(!$this->initialize()) {
-                    return;
-                }
+        if (!$this->lazyLoadLogger()) {
+            return;
+        }
 
 		if (isset($record['context']) && isset($record['context']['tag'])) {
 			$tag = $record['context']['tag'];
