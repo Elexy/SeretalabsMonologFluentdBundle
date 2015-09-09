@@ -4,6 +4,7 @@ namespace Seretalabs\Bundle\MonologFluentdBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
@@ -25,16 +26,22 @@ class SeretalabsMonologFluentdExtension extends Extension
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
 
-        // Set the level to the correct integer value provided by Monoglog
-        $config['level'] = is_int($config['level']) ?
-		        $config['level'] : constant('Monolog\Logger::'.strtoupper($config['level']));
+        // Set the level to the correct integer value provided by Monolog
+        $level = is_int($config['level'])
+            ? $config['level']
+            : constant('Monolog\Logger::'.strtoupper($config['level']))
+        ;
 
-
-	    $container->setParameter('monolog_fluentd.fluentd.port', $config['port']);
-	    $container->setParameter('monolog_fluentd.fluentd.host', $config['host']);
-	    $container->setParameter('monolog_fluentd.fluentd.level', $config['level']);
-        $container->setParameter('monolog_fluentd.fluentd.bubble', $config['bubble']);
-        $container->setParameter('monolog_fluentd.fluentd.env', $config['env']);
-        $container->setParameter('monolog_fluentd.fluentd.tag', $config['tag']);
+        $handlerDefinition = new Definition();
+        $handlerDefinition
+            ->setClass($container->getParameter('monolog_fluentd.monolog_handler.class'))
+            ->addArgument($config['port'])
+            ->addArgument($config['host'])
+            ->addArgument($level)
+            ->addArgument($config['bubble'])
+            ->addArgument($config['env'])
+            ->addArgument($config['tag'])
+        ;
+        $container->setDefinition('monolog_fluentd.monolog_handler', $handlerDefinition);
     }
 }

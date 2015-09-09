@@ -61,6 +61,10 @@ class MonologFluentdHandler extends AbstractProcessingHandler
 		$this->env = $env;
 		$this->tag = $tag;
 
+        if (!$this->host) {
+            $this->logger = false; // disable logging if host is not provided
+        }
+
 		parent::__construct($level, $bubble);
 	}
 
