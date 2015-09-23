@@ -1,6 +1,6 @@
 <?php
 
-namespace Seretalabs\Bundle\MonologFluentdBundle;
+namespace Seretalabs\MonologFluentdBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

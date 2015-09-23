@@ -14,7 +14,7 @@ Kernel
 
     $bundles = array(
         //..
-        new Seretalabs\Bundle\MonologFluentdBundle\SeretalabsMonologFluentdBundle(),
+        new Seretalabs\MonologFluentdBundle\SeretalabsMonologFluentdBundle(),
     );
 
 Autoload:

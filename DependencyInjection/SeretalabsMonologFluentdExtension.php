@@ -1,6 +1,6 @@
 <?php
 
-namespace Seretalabs\Bundle\MonologFluentdBundle\DependencyInjection;
+namespace Seretalabs\MonologFluentdBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
