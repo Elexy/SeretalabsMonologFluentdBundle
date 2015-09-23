@@ -1,4 +1,4 @@
-# SeretalabsMonologFluentdBundle
+# MonologFluentdBundle
 
     This bundle enables logging to the fluentd log concentrator from Symfony.
     Fluentd is an open source datacollector and decouples your logging collection
@@ -14,7 +14,7 @@ Kernel
 
     $bundles = array(
         //..
-        new Seretalabs\MonologFluentdBundle\SeretalabsMonologFluentdBundle(),
+        new Seretalabs\MonologFluentdBundle\MonologFluentdBundle(),
     );
 
 Autoload:
