@@ -5,6 +5,7 @@ namespace Seretalabs\MonologFluentdBundle\DependencyInjection;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
@@ -42,6 +43,9 @@ class MonologFluentdExtension extends Extension
             ->addArgument($config['env'])
             ->addArgument($config['tag'])
         ;
+        if (isset($config['formatter']) && !empty($config['formatter'])) {
+            $handlerDefinition->addMethodCall('setFormatter', [new Reference($config['formatter'])]);
+        }
         $container->setDefinition('monolog_fluentd.monolog_handler', $handlerDefinition);
     }
 }
