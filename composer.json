@@ -1,5 +1,5 @@
 {
-    "name": "seretalabs/monolog-fluentd-bundle",
+    "name": "matrooskin/monolog-fluentd-bundle",
     "description": "Simple wrapper bundle for Symfony2 that extends Monolog with Fluentd support",
     "type": "bundle",
     "authors": [{"name": "Alex Knol", "email": "alex@seretalabs.com"}],
