@@ -33,6 +33,7 @@ class MonologFluentdExtension extends Extension
             : constant('Monolog\Logger::'.strtoupper($config['level']))
         ;
 
+        $tag = 'app.' . gethostname();
         $handlerDefinition = new Definition();
         $handlerDefinition
             ->setClass($container->getParameter('monolog_fluentd.monolog_handler.class'))
@@ -40,7 +41,7 @@ class MonologFluentdExtension extends Extension
             ->addArgument($config['host'])
             ->addArgument($level)
             ->addArgument($config['bubble'])
-            ->addArgument($config['env'])
+            ->addArgument($tag)
             ->addArgument($config['tag'])
         ;
         if (isset($config['formatter']) && !empty($config['formatter'])) {
