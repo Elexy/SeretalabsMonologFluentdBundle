@@ -24,16 +24,15 @@ class MonologFluentdExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
 
         // Set the level to the correct integer value provided by Monolog
         $level = is_int($config['level'])
             ? $config['level']
-            : constant('Monolog\Logger::'.strtoupper($config['level']))
-        ;
+            : constant('Monolog\Logger::' . strtoupper($config['level']));
 
-        $tag = 'app.' . gethostname();
+        $tag = $config['tag'] . '.' . gethostname();
         $handlerDefinition = new Definition();
         $handlerDefinition
             ->setClass($container->getParameter('monolog_fluentd.monolog_handler.class'))
@@ -41,9 +40,9 @@ class MonologFluentdExtension extends Extension
             ->addArgument($config['host'])
             ->addArgument($level)
             ->addArgument($config['bubble'])
-            ->addArgument($tag)
-            ->addArgument($config['tag'])
-        ;
+            ->addArgument($config['env'])
+            ->addArgument($tag);
+
         if (isset($config['formatter']) && !empty($config['formatter'])) {
             $handlerDefinition->addMethodCall('setFormatter', [new Reference($config['formatter'])]);
         }
