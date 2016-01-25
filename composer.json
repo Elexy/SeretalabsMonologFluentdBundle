@@ -1,14 +1,14 @@
 {
-    "name": "seretalabs/monolog-fluentd-bundle",
+    "name": "matrooskin/monolog-fluentd-bundle",
     "description": "Simple wrapper bundle for Symfony2 that extends Monolog with Fluentd support",
     "type": "bundle",
     "authors": [{"name": "Alex Knol", "email": "alex@seretalabs.com"}],
     "require": {
         "symfony/monolog-bundle": "*",
-	      "fluent/logger": "v0.3.7"
+        "fluent/logger": "0.3.*"
     },
     "autoload": {
-        "psr-0": {"Seretalabs\\Bundle\\MonologFluentdBundle\\": ""}
+        "psr-0": {"Seretalabs\\MonologFluentdBundle\\": ""}
     },
-    "target-dir" : "Seretalabs/Bundle/MonologFluentdBundle"
+    "target-dir" : "Seretalabs/MonologFluentdBundle"
 }

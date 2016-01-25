@@ -1,6 +1,6 @@
 <?php
 
-namespace Seretalabs\Bundle\MonologFluentdBundle\DependencyInjection;
+namespace Seretalabs\MonologFluentdBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -21,12 +21,13 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->root('monolog_fluentd');
 
         $rootNode->children()
-			        ->scalarNode('port')->defaultValue(24224)->end()
-			        ->scalarNode('host')->defaultValue('localhost')->end()
-			        ->scalarNode('level')->defaultValue(constant('Monolog\Logger::DEBUG'))->end()
-	                ->booleanNode('bubble')->defaultValue(true)->end()
-	                ->scalarNode('env')->defaultValue('none')->end()
-	                ->scalarNode('tag')->defaultValue('backend')->end()
+            ->scalarNode('port')->defaultValue(24224)->end()
+            ->scalarNode('host')->defaultValue('localhost')->end()
+            ->scalarNode('level')->defaultValue(constant('Monolog\Logger::DEBUG'))->end()
+            ->booleanNode('bubble')->defaultValue(true)->end()
+            ->scalarNode('env')->defaultValue('none')->end()
+            ->scalarNode('tag')->defaultValue('backend')->end()
+            ->scalarNode('formatter')->end()
             ->end();
 
         return $treeBuilder;

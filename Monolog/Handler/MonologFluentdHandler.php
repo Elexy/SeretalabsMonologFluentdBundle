@@ -11,7 +11,7 @@
  * to kontakt@beberlei.de so I can send you a copy immediately.
  */
 
-namespace Seretalabs\Bundle\MonologFluentdBundle\Monolog\Handler;
+namespace Seretalabs\MonologFluentdBundle\Monolog\Handler;
 
 use Fluent\Logger\FluentLogger;
 use Monolog\Handler\AbstractProcessingHandler;
@@ -28,7 +28,7 @@ use Monolog\Logger;
 class MonologFluentdHandler extends AbstractProcessingHandler
 {
 	/**
-	 * @var FluentLogger
+	 * @var FluentLogger|bool
 	 */
 	private $logger;
 	/**
@@ -61,10 +61,31 @@ class MonologFluentdHandler extends AbstractProcessingHandler
 		$this->env = $env;
 		$this->tag = $tag;
 
-		parent::__construct($level, $bubble);
+        if (!$this->host) {
+            $this->logger = false; // disable logging if host is not provided
+        }
 
-		$this->logger = new FluentLogger($host, $port);
+		parent::__construct($level, $bubble);
 	}
+
+    private function lazyLoadLogger() {
+
+        if ($this->logger || ($this->logger === false)) {
+            // return if FluentLogger is already loaded or failed to load
+            return $this->logger;
+        }
+
+        // Ensure service failure does not compromise the app
+        try {
+            $this->logger = new FluentLogger($this->host, $this->port);
+        }
+        catch (\Exception $e) {
+            $this->logger = false;
+        }
+
+        return $this->logger;
+    }
+
 
 	/**
 	 * {@inheritdoc}
@@ -92,6 +113,10 @@ class MonologFluentdHandler extends AbstractProcessingHandler
 	 */
 	protected function write(array $record)
 	{
+        if (!$this->lazyLoadLogger()) {
+            return;
+        }
+
 		if (isset($record['context']) && isset($record['context']['tag'])) {
 			$tag = $record['context']['tag'];
 		} else {
@@ -99,8 +124,11 @@ class MonologFluentdHandler extends AbstractProcessingHandler
 		}
 		$tag = $tag . '.' . $this->env;
 
-		$data = $record;
-		$data['level'] = Logger::getLevelName($record['level']);
+		if (isset($record['formatted']) && is_array($record['formatted'])) {
+			$data = $record['formatted'];
+		} else {
+			$data = $record;
+		}
 
 		$this->logger->post($tag, $data);
 	}
