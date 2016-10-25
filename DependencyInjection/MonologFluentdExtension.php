@@ -44,7 +44,7 @@ class MonologFluentdExtension extends Extension
             ->addArgument($tag);
 
         if (isset($config['formatter']) && !empty($config['formatter'])) {
-            $handlerDefinition->addMethodCall('setFormatter', [new Reference($config['formatter'])]);
+            $handlerDefinition->addMethodCall('setFormatter', array(new Reference($config['formatter'])));
         }
         $container->setDefinition('monolog_fluentd.monolog_handler', $handlerDefinition);
     }
